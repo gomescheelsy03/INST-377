@@ -1,0 +1,94 @@
+body{
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #fdf2f8;
+    color: #554c50;
+    text-align: center;
+}
+
+body { 
+    background-color: #fdf2f8; 
+    color: #213813;
+}      
+body.page2 { background-color: #c2d5b7; } 
+body.page2 h1 { text-align: center; }
+body.page2 img { display:block; width:50%; margin:16px auto; }
+
+h2{
+    font-weight: normal;
+}
+
+h3{
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 10%;
+}
+
+.divider{
+      border: 0;
+  height: 1px;
+  width: 65%;
+  max-width: 520px;
+  background: #e9bcd0;     
+  opacity: .7;
+  margin: 8px auto 28px;   
+}
+
+form div {
+  margin: 24px 0;
+}
+
+label {
+  display: block;
+  font-size: 1.1rem;
+  margin: 0 auto 10px;     
+  max-width: 400px;        
+  text-align: left;        
+}
+
+select:invalid { color: #888; }
+select option { color: #333; }
+
+input, textarea, select {
+  display: block;          
+  margin: 6px auto 0;      
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 60%;
+  max-width: 400px;
+
+}
+
+input[type="submit"] {
+  margin-top: 24px;        
+  background-color: white;
+  border: 2px solid #fbb6ce;
+  color: #fbb6ce;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #fbb6ce; 
+  color: white; 
+  border-color: #f687b3; 
+}
+
+.back-link {
+  display: inline-block;      
+  margin: 18px auto 0;        
+  padding: 10px 16px;
+  text-decoration: none;     
+  border: 2px solid #609044;
+  border-radius: 20px;
+  color: #609044;
+  transition: all .2s ease;
+}
+
+.back-link:hover {
+  background: #41612f;
+  color: #fff;
+}

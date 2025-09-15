@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title> INST 377 - Lab 2 - Page 1  </title>
+        <link rel="stylesheet" href="Lab 2 Style.css">
+    </head>
+
+    <body>
+    <h1> Let's Talk Books </h1>
+    <h2> Tell me about yourself and favorite reads, I am looking for recs! </h2>
+    
+    <p>
+        Hi, I’m Chelsy! I’m a book lover who can never pick just one favorite genre,
+        fantasy and historical fiction are my top two, but I’ll read anything that keeps me hooked.  
+        I’m looking for some good books to read this year, so send me your best recommendations,  
+        and if it’s one I’ve already read, who knows? I might just reread it.
+    </p>
+
+    <hr class="divider">
+
+    <form action="Lab 2 - Page 2.html">
+        <div class="field">
+        <label for="fname">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="field">
+        <label for="fgenre">Favorite Genre:</label>
+        <select id="fgenre" name="genre_selection" required>
+            <option value="" selected disabled hidden>— Select a genre —</option>
+            <option value="Romance"> Romance </option>
+            <option value="Mystery"> Mystery </option>
+            <option value="Fantasy"> Fantasy </option>
+            <option value="Sci-fi"> Sci-fi </option>
+            <option value="Hfiction"> Historical Fiction </option>
+            <option value="Nonfiction"> Nonfiction </option>
+        </select> 
+        </div>
+
+        <div class="field">
+        <label for="brec">Book Recommendation:</label>
+        <input type="text" id="brec" name="brec" required>
+        </div>
+
+        <div class="field">
+        <input type="submit" value="Submit">
+        </div>
+    </form> 
+
+    <h3> “Powered by too much coffee & late-night reading ☕” </h3>
+
+    </body>
+</html>
