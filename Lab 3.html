@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>Lab 3 — Ice-Cream Picker</title>
+    <link rel="stylesheet" href="Lab 3 Style.css">
+  </head>
+
+  <body>
+    <!-- PAGE WRAPPER (so footer can stick to bottom) -->
+    <div class="page">
+
+      <!-- Header + Nav (header and footer share .banner) -->
+      <div class="banner">
+        <h1>Ice-Cream Picker</h1>
+
+        <!-- Nav: 3 items, horizontal, no bullets, hover, open different sites -->
+        <ul class="nav">
+          <li><a href="https://www.linkedin.com/in/chelsy-gomes-317b02302/" target="_blank" rel="noopener">Linkedin</a></li>
+          <li><a href="https://github.com/gomescheelsy03" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://medium.com/@cgomes13" target="_blank" rel="noopener">Medium</a></li>
+        </ul>
+      </div>
+
+      
+      <div class="content">
+      
+        <div class="main">
+          <h2>Please choose one of the following.</h2>
+
+          <!-- form: label + required name + select; input grows on focus -->
+          <form id="icecream-form" action="#" method="get">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required placeholder="e.g., Chelsy">
+
+            <label for="flavor">Your choice</label>
+            <select id="flavor" name="flavor">
+              <option value="Vanilla">Vanilla</option>
+              <option value="Matcha">Matcha</option>
+              <option value="Strawberry">Strawberry</option>
+              <option value="Chocolate">Chocolate</option>
+              <option value="Mango">Mango</option>
+            </select>
+
+            <button type="submit">Submit</button>
+
+            <p class="helper">Tip: click the name box </p>
+
+            <!-- Where the result will appear -->
+            <p id="result" class="result" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- SIDEBAR: percentage width, different color, hover background change -->
+        <div class="sidebar">
+          <h2>Top 3 flavors this week</h2>
+          <ol>
+            <li>Matcha</li>
+            <li>Strawberry</li>
+            <li>Vanilla Bean</li>
+          </ol>
+        </div>
+      </div>
+    </div> 
+
+    <!-- Footer (SAME .banner class as header) -->
+    <footer class="banner">
+      <p>This is the footer. Have a sweet day 🍦</p>
+    </footer>
+
+    <!-- Tiny JS: show a friendly message on submit (no reload) -->
+    <script>
+      document.getElementById('icecream-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // stop page reload
+        const name = document.getElementById('name').value.trim() || 'friend';
+        const flavor = document.getElementById('flavor').value;
+        const msg = `Thanks, ${name}! Enjoy your ${flavor}. 🍨`;
+        document.getElementById('result').textContent = msg;
+      });
+    </script>
+  </body>
+</html>
