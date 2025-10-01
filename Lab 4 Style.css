@@ -1,0 +1,118 @@
+:root {
+  --bg: #ffeef7;       
+  --panel: #b689f9;     
+  --panel-dark: #9d6de0; 
+  --text: #2b2240;
+  --muted: #ffffff;     
+  --btn: #ffe6f7;       
+  --btn-hover: #ffd3f3; 
+  --btn-active: #ffc6ec; 
+  --ring: #fff;
+  --shadow: 0 4px 14px rgba(45, 29, 75, .15);
+  --radius: 12px;
+}
+
+/* reset */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center; 
+}
+
+/* container */
+.container {
+  max-width: 980px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* title */
+h1 {
+  margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* panel style */
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--panel-dark);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: var(--shadow);
+  color: white;
+  text-align: left;
+  position: relative;
+}
+
+/* white outline ring like example */
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 2px solid var(--ring);
+  border-radius: calc(var(--radius) - 4px);
+  pointer-events: none;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+/* labels + inputs */
+label {
+  margin-right: 8px;
+  font-weight: 600;
+}
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d9c9ff;
+  background: var(--muted);
+  outline: none;
+}
+input:focus {
+  border-color: #b8a1ff;
+  box-shadow: 0 0 0 3px rgba(184,161,255,.3);
+}
+
+/* buttons */
+button {
+  padding: 10px 14px;
+  margin-left: 8px;
+  border-radius: 8px;
+  border: 1px solid #aa4d82;
+  background: var(--btn);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+button:hover {
+  background: var(--btn-hover);
+  box-shadow: 0 4px 10px rgba(47,31,85,.15);
+}
+button:active {
+  background: var(--btn-active);
+  transform: translateY(1px);
+}
+
+/* grid layout like example */
+@media (min-width: 900px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  h1 {
+    grid-column: 1 / -1;
+  }
+  .panel {
+    margin: 0;
+  }
+}

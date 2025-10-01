@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <title> INST 377 - Lab 4 </title>
+         <link rel="stylesheet" href="Lab 4 Style.css">
+    </head>
+
+<body>
+  <main class="container">
+    <h1 id="pageTitle">INST377 - Lab 4</h1>
+
+    <!-- Alert Me Section -->
+    <section class="panel">
+      <h2>Alert Me</h2>
+      <form>
+        <label for="nameInput">Name</label>
+        <input id="nameInput" type="text" required />
+        <button type="button" id="alertBtn">Alert Me</button>
+      </form>
+    </section>
+
+    <!-- Change Color Section -->
+    <section class="panel">
+      <h2>Change Color</h2>
+      <button type="button" id="colorBtn">Change Color</button>
+    </section>
+
+    <!-- Text Tester Section -->
+    <section class="panel">
+      <h2>Text Tester</h2>
+      <form>
+        <label for="textInput">Enter Text</label>
+        <input id="textInput" type="text" />
+        <button type="button" id="validateBtn">Validate Text</button>
+      </form>
+    </section>
+
+    <!-- Add Text Section -->
+    <section class="panel">
+      <h2>Add Text</h2>
+      <button type="button" id="addTextBtn">Add Text</button>
+    </section>
+  </main>
+
+  <!-- Inline JavaScript -->
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('pageColor');
+    if (saved) document.body.style.backgroundColor = saved;
+
+    document.getElementById('alertBtn').addEventListener('click', alertMe);
+    document.getElementById('colorBtn').addEventListener('click', changeColor);
+    document.getElementById('validateBtn').addEventListener('click', validateText);
+    document.getElementById('addTextBtn').addEventListener('click', addText);
+  });
+
+  // 1. Alert Me
+  function alertMe() {
+    const name = document.getElementById('nameInput').value.trim();
+    if (!name) {
+      alert("Please enter your name first.");
+      return;
+    }
+    alert(`Hi ${name}!`);
+  }
+
+  // 2. Change Color (toggle between pastel pink and mint green)
+  function changeColor() {
+    const current = (getComputedStyle(document.body).backgroundColor || '').toLowerCase();
+    const next = current.includes('255, 238, 247') || current.includes('pink') 
+                 ? '#d5f5e3'   // mint green
+                 : '#ffeef7';  // pastel pink
+    document.body.style.backgroundColor = next;
+    localStorage.setItem('pageColor', next);
+  }
+
+  // 3. Text Tester
+  function validateText() {
+    var validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/; 
+    const text = document.getElementById('textInput').value.trim();
+
+    if (text === "") {
+      alert("Please enter some text first.");
+      return;
+    }
+
+    if (validation.test(text)) {
+      alert('There is a Special Character.');
+    } else {
+      alert('How about…nah');
+    }
+  }
+
+  // 4. Add Text
+  function addText() {
+    const title = document.getElementById('pageTitle');
+    if (!title.textContent.includes('Add Text')) {
+      title.textContent += ' Add Text';
+    }
+  }
+</script>
+
+</body>
+</html>
