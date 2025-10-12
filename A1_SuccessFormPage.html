@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="A1_Style.css">
+  <title>Form Submitted</title>
+
+  <!-- 15-second auto redirect -->
+  <script>
+    setTimeout(function(){
+      window.location.href = "A1_HomePage.html";
+    }, 5000); // 5 seconds
+  </script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="site-header">
+    <h1>Thank You!</h1>
+  </header>
+
+  <!-- Cute image below header -->
+   <div class="success-image">
+    <img src="https://i.pinimg.com/originals/6e/bb/7e/6ebb7efa1b9a7c031dba6d6890ef1a09.gif" alt="Success Image">
+  </div>
+
+  <!-- Main Content -->
+  <main id="success-content">
+    <h2>Your message has been received 💌<br>
+    You’ll be redirected to the homepage in <strong>5 seconds</strong>.</h2>
+
+    <!-- Home Icon inside a circle -->
+    <a href="A1_HomePage.html" class="home-circle">
+      <img src="https://cdn-icons-png.flaticon.com/512/7411/7411897.png" alt="Home Icon">
+    </a>
+
+    <p class="redirect-note">Click the home icon if the page doesn’t redirect automatically.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <p>&copy; INST 377 - Assignment 1 - Chelsy Gomes</p>
+  </footer>
+</body>
+</html>

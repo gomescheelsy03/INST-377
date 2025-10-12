@@ -1,0 +1,82 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="A1_Style.css">
+  <title> Contact Us </title>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="site-header">
+    <h1>Contact Me</h1>
+  </header>
+
+  <!-- Navigation bar with 3 pages -->
+  <nav id="main-nav" aria-label="Primary">
+    <ul>
+      <li><a href="A1_HomePage.html">Home</a></li>
+      <li><a href="A1_GamesPage.html">Games</a></li>
+      <li><a href="A1_ContactPage.html">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content wrapper -->
+  <main class="wrap">
+    <section class="split">
+      <!-- Main section (form card) -->
+      <article class="main" id="contact-content">
+        <h2>Have Questions? Feel free to reach out!</h2>
+
+        <!-- Contact form (validation & redirect will be added with JS later) -->
+        <form id="contact-form" action="#" method="post">
+          <div class="sub">
+            <label for="name">Name:</label><br />
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="sub">
+            <label for="date">Preferred Date:</label><br />
+            <input type="date" id="date" name="date" required />
+          </div>
+
+          <div class="sub">
+            <label for="message">Your Message (Big Textbox):</label><br />
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <button type="submit" class="side-btn">Submit</button>
+        </form>
+        <!-- End Contact form -->
+      </article>
+      
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <p>&copy; INST 377 - Assignment 1 - Chelsy Gomes</p>
+  </footer>
+
+  <script>
+  // Validation: no special characters allowed in the big textbox
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // stop the form from submitting normally
+
+    const message = document.getElementById("message").value;
+    // Allow only letters, numbers, spaces, and basic punctuation
+    const valid = /^[A-Za-z0-9\s\.\,\?\!]*$/.test(message);
+
+    if (!valid) {
+      alert("Please remove special characters from the message box.");
+      return false;
+    }
+
+    // If valid, redirect to Success page
+    window.location.href = "A1_SuccessFormPage.html";
+  });
+</script>
+
+
+</body>
+</html>

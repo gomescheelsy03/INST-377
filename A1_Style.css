@@ -1,0 +1,163 @@
+:root{
+  --brand: #b5c7a8;     /* header + footer color */
+  --page-bg: #f0eae0;   /* page background  */
+  --nav-hover: #e8f0e6; /* nav <li> hover color */
+  --btn: #ffb3c1;       /* blush button */
+  --btn-hover: #ff8fa3; /* blush hover */
+}
+
+/* Base */
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family:"Quicksand","Nunito",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--page-bg);
+  color:#2b2b2b;
+  line-height:1.6;
+  letter-spacing:.2px;
+}
+
+/* Header (flat edges; h1 centered) */
+#site-header{
+  background:var(--brand);
+  color:#fff;
+  padding:16px 12px;
+}
+#site-header h1{ margin:0; text-align:center; }
+
+/* Nav bar (hover on li) */
+#main-nav{
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+}
+#main-nav ul{
+  list-style:none;
+  margin:0; padding:6px;
+  display:flex; gap:16px; justify-content:center;
+}
+#main-nav li{
+  padding:10px 14px; cursor:pointer;
+  border-radius:10px;
+  transition:background-color .2s ease, transform .1s ease;
+}
+#main-nav li:hover{ background:var(--nav-hover); transform:translateY(-1px); }
+#main-nav a{ display:block; text-decoration:none; color:inherit; font-weight:600; }
+
+/* Home page layout: main ~60%, sidebar ~20% — BOTH black border */
+.wrap{ max-width:1100px; margin:22px auto; padding:0 12px; }
+.split{ display:flex; gap:20px; align-items:stretch; }
+
+.main{
+  flex:0 0 60%;
+  border:1.5px solid #000;                    /* required: black border */
+  background:#fff; padding:16px;
+  border-radius:16px; box-shadow:0 8px 22px rgba(0,0,0,.06);
+}
+.sidebar{
+  flex:0 0 20%;
+  border:1.5px solid #000;                    /* black border */
+  background:#fff; padding:16px;
+  border-radius:16px; box-shadow:0 8px 22px rgba(0,0,0,.06);
+}
+
+/* Home: sub-sections & small logo */
+.sub{ border-top:1px dashed #e6e0d8; padding:14px 0; }
+.sub:first-of-type{ border-top:none; }
+.logo-link img{ width:60px; height:auto; display:inline-block; filter:saturate(.95); }
+
+/* Sidebar button (Home) */
+.side-btn{
+  display:inline-block; margin-top:10px; padding:10px 14px;
+  background:var(--btn); color:#fff; text-decoration:none;
+  border-radius:999px; border:1px solid #ffa3b5;
+  transition:background-color .2s ease, transform .1s ease, box-shadow .2s ease;
+  box-shadow:0 8px 18px rgba(255,143,163,.25);
+}
+.side-btn:hover{ background:var(--btn-hover); transform:translateY(-1px); }
+
+/* Footer (matches header color; centered text) */
+#site-footer{
+  margin-top:24px; background:var(--brand); color:#fff;
+  text-align:center; padding:12px 10px;
+}
+
+/* Contact page card + fields */
+#contact-content{
+  max-width:640px; margin:48px auto;
+  border:1.2px solid #6b6b6b; border-radius:20px;
+  padding:32px 36px; background:#fffdfb;
+  box-shadow:0 10px 26px rgba(0,0,0,.05);
+}
+#contact-form input[type="text"],
+#contact-form input[type="date"],
+#contact-form textarea{
+  width:100%;
+  border-radius:12px; border:1.2px solid #d8d2c9; background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.04);
+  padding:12px 14px; font-size:.95rem; transition:all .2s ease;
+}
+#contact-form input:focus,
+#contact-form textarea:focus{
+  border-color:#c9b8aa; box-shadow:0 0 0 4px rgba(200,182,166,.15); outline:none;
+}
+#contact-form textarea{ min-height:180px; resize:vertical; }
+#contact-form .side-btn{
+  border:1px solid #ffa3b5; background:var(--btn); color:#fff;
+  padding:10px 28px; border-radius:999px; font-weight:600; letter-spacing:.3px;
+  cursor:pointer; transition:all .2s ease;
+  box-shadow:0 6px 14px rgba(255,143,163,.25);
+}
+#contact-form .side-btn:hover{ background:var(--btn-hover); box-shadow:0 8px 20px rgba(255,143,163,.35); }
+
+/* Success Form Page */
+#success-content{
+  text-align:center;
+  margin-top:30px;
+  min-height:auto;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+}
+#success-content h2{ font-weight:600; line-height:1.6; margin-bottom:25px; }
+
+/* Top image under header */
+.success-image{ text-align:center; margin-top:10px; }
+.success-image img{
+  width:min(80vw, 480px);          /* responsive & cute */
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.10);
+  transition:transform .3s ease;
+}
+.success-image img:hover{ transform:scale(1.05); }
+
+/* Home icon — simple, centered, no circle */
+.home-circle {
+  display: inline-block;
+  margin-top: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-circle img {
+  width: 70px;                 
+  height: auto;
+  border-radius: 10px;         
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+  transition: transform 0.3s ease;
+}
+
+.home-circle img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer fixed on Success page  */
+#success-content ~ #site-footer{
+  position:fixed; bottom:0; left:0; width:100%;
+  background:var(--brand); color:#fff; text-align:center; padding:12px 10px;
+}
+
+/* Responsive */
+@media (max-width:800px){
+  .split{ flex-direction:column; }
+  .main,.sidebar{ flex:1 1 auto; }
+}

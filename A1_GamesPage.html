@@ -1,0 +1,120 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="A1_Style.css">
+  <title>Games</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="site-header">
+    <h1>Games</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav id="main-nav" aria-label="Primary">
+    <ul>
+      <li><a href="A1_HomePage.html">Home</a></li>
+      <li><a href="A1_GamesPage.html">Games</a></li>
+      <li><a href="A1_ContactPage.html">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Game Section -->
+  <main class="wrap">
+    <section class="split">
+      <article class="main" id="game-content">
+        <h2>Rock • Paper • Scissors</h2>
+
+        <!-- Game Form -->
+        <form id="rps-form" action="#" method="post">
+          <label for="user-choice"><strong>Choose your move:</strong></label><br><br>
+          <select id="user-choice" name="choice" required style="padding: 10px; border-radius: 10px; border: 1px solid #ccc;">
+            <option value="">-- Select an option --</option>
+            <option value="Rock">Rock</option>
+            <option value="Paper">Paper</option>
+            <option value="Scissors">Scissors</option>
+          </select>
+          <br><br>
+          <button type="submit" class="side-btn">Play</button>
+        </form>
+
+        <!-- Results Section -->
+        <section class="split" id="results-row" style="margin-top: 20px;">
+          <article class="main" id="you-box" style="flex:0 0 48%;">
+            <h3>You Chose:</h3>
+            <p id="you-chose">—</p>
+          </article>
+
+          <aside class="sidebar" id="computer-box" style="flex:0 0 48%;">
+            <h3>Computer Chose:</h3>
+            <p id="computer-chose">—</p>
+          </aside>
+        </section>
+      </article>
+
+      <!-- Sidebar Info -->
+      <aside class="sidebar" id="game-notes">
+        <h3>Rules</h3>
+        <p>Select Rock, Paper, or Scissors and press <em>Play</em>.</p>
+        <p>The computer randomly chooses Rock, Paper, Scissors, or <strong>Spock</strong>.  
+        If the computer chooses Spock, it automatically wins. Humans cannot choose Spock!</p>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <p>&copy; INST 377 - Assignment 1 - Chelsy Gomes</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function randomChoice(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    const beats = { Rock: "Scissors", Paper: "Rock", Scissors: "Paper" };
+    const COLORS = {
+      win: "#355E3B",  // Hunter green
+      lose: "#A30000", // Dark Candy Apple Red
+      tie: "#000047"   // Deep navy
+    };
+
+    document.getElementById("rps-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const user = document.getElementById("user-choice").value;
+      if (!user) return alert("Please select an option first!");
+
+      const computer = randomChoice(["Rock", "Paper", "Scissors", "Spock"]);
+
+      document.getElementById("you-chose").textContent = user;
+      document.getElementById("computer-chose").textContent = computer;
+
+      let result;
+      if (computer === "Spock") {
+        result = "lose";
+      } else if (user === computer) {
+        result = "tie";
+      } else if (beats[user] === computer) {
+        result = "win";
+      } else {
+        result = "lose";
+      }
+
+      if (result === "win") {
+        document.body.style.backgroundColor = COLORS.win;
+        alert("You Win!");
+      } else if (result === "lose") {
+        document.body.style.backgroundColor = COLORS.lose;
+        alert("You Lose");
+      } else {
+        document.body.style.backgroundColor = COLORS.tie;
+        alert("Tie");
+      }
+    });
+  </script>
+</body>
+</html>
