@@ -1,0 +1,90 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>INST377 - Lab 6</title>
+  <!-- Leaflet CSS  -->
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     
+</head>
+<body>
+  <h1>Map </h1>git add L6_index.html
+
+
+  <!-- Map container -->
+  <div id="map" style="height: 400px;"></div>
+
+  <!-- text below the map -->
+  <h2>Marker 1 (Randomly Generated Coordinates Point 1)</h2>
+  <div id="locality-1">Locality: (loading...)</div>
+
+  <h2>Marker 2 (Randomly Generated Coordinates Point 2)</h2>
+  <div id="locality-2">Locality: (loading...)</div>
+
+  <h2>Marker 3 (Randomly Generated Coordinates Point 3)</h2>
+  <div id="locality-3">Locality: (loading...)</div>
+
+
+  <!-- JavaScript -->
+  <script>
+    // random function 
+    function getRandomInRange(from, to, fixed) {
+      return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+      // .toFixed() returns string, so ' * 1' is a trick to convert to number
+    }
+
+    // Initialize map: default to US coordinates 
+    const map = L.map('map').setView([37.5, -96], 4);
+
+    // Basic tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Generate exactly 3 random coordinate pairs using the specified ranges
+    const points = [];
+    for (let i = 0; i < 3; i++) {
+      const lat = getRandomInRange(30, 35, 3);     // latitude
+      const lng = getRandomInRange(-100, -90, 3);  // longitude
+      points.push([lat, lng]);
+    }
+
+    // Add markers and build bounds so the view shows all random points
+    const markers = [];
+    const bounds = L.latLngBounds();
+    points.forEach((p) => {
+      const m = L.marker(p).addTo(map);
+      markers.push(m);
+      bounds.extend(p);
+    });
+
+    // Fit the map to include all three markers
+    map.fitBounds(bounds.pad(0.25)); // small padding for visibility
+
+    // For each marker, call the reverse-geocode API and display the Locality
+    const localityTargets = [
+      document.getElementById('locality-1'),
+      document.getElementById('locality-2'),
+      document.getElementById('locality-3')
+    ];
+
+    points.forEach(async ([lat, lng], idx) => {
+      try {
+        const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const locality = data.locality || 'Unknown';
+        localityTargets[idx].textContent = `Locality: ${locality}`;
+      } catch (e) {
+        localityTargets[idx].textContent = 'Locality: (error fetching)';
+      }
+    });
+  </script>
+</body>
+</html>
