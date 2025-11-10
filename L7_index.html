@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Search (Lab 7)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+  :root{--accent:#8b5e3c;--accent-light:#f5e9dc;--bg:#fcf8f4;--radius:10px;font-family:"Poppins",sans-serif;}
+  body{background:var(--bg);margin:0;}
+  main{max-width:700px;margin:60px auto;padding:20px;background:#fff;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,.05);}
+  h1{text-align:center;color:var(--accent);margin-bottom:8px;}
+  h2{text-align:center;color:#5b4636;font-weight:500;margin-bottom:20px;}
+  form{display:flex;gap:8px;margin-bottom:12px;}
+  input[type="text"]{flex:1;padding:10px;border:1px solid #d4bfa3;border-radius:var(--radius);background:var(--accent-light);}
+  input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px #f3d9b1;}
+  button{background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:10px 16px;cursor:pointer;transition:.3s;}
+  button:hover{background:#6d452d;transform:scale(1.05);}
+  #loading{text-align:center;color:var(--accent);margin:10px 0;font-weight:500;}
+  table{width:100%;border-collapse:collapse;margin-top:10px;}
+  th,td{border:1px solid #e0d6c8;padding:8px;text-align:left;}
+  thead th{background:var(--accent-light);color:var(--accent);}
+  tr:nth-child(even)td{background:#fdf9f4;}
+  tr:hover td{background:#f2e6da;transition:.2s;}
+  [hidden]{display:none;}
+</style>
+
+</head>
+<body>
+  <main>
+    <!-- BEFORE SEARCH: show title and form only -->
+    <h1>Let's Lookup Some Books</h1>
+    <h2>Please enter a book name</h2>
+
+    <form id="search-form">
+      <input id="book-input" type="text" placeholder="Enter a book title" required aria-label="Book title" />
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- DURING SEARCH: show ONLY this while fetch is in progress -->
+    <p id="loading" hidden>Please wait while we load the books☕…</p>
+
+    <!-- AFTER SEARCH: show results table -->
+    <table id="results" hidden>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Authors</th>
+        </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+    </table>
+  </main>
+
+  <script>
+    (function setup() {
+      document.getElementById('search-form').addEventListener('submit', searchBooks);
+    })();
+
+    async function searchBooks(event) {
+      event.preventDefault();
+      const input = document.getElementById('book-input');
+      const loadingEl = document.getElementById('loading');
+      const tableEl = document.getElementById('results');
+      const tbodyEl = document.getElementById('results-body');
+
+      const rawTitle = input.value.trim();
+      if (!rawTitle) return;
+      const titleWithPluses = rawTitle.replace(/\s+/g, '+');
+
+      loadingEl.hidden = false;
+      tableEl.hidden = true;
+
+      const url = 'https://openlibrary.org/search.json?title=' + titleWithPluses;
+
+      try {
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        tbodyEl.innerHTML = '';
+
+        const docs = Array.isArray(data.docs) ? data.docs : [];
+        if (docs.length === 0) {
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.colSpan = 2;
+          td.textContent = 'No results found.';
+          tr.appendChild(td);
+          tbodyEl.appendChild(tr);
+        } else {
+          docs.forEach(doc => {
+            const tr = document.createElement('tr');
+            const titleCell = document.createElement('td');
+            titleCell.textContent = doc.title || '';
+            const authorsCell = document.createElement('td');
+            const authors = Array.isArray(doc.author_name) ? doc.author_name.join(', ') : '';
+            authorsCell.textContent = authors;
+            tr.appendChild(titleCell);
+            tr.appendChild(authorsCell);
+            tbodyEl.appendChild(tr);
+          });
+        }
+
+        loadingEl.hidden = true;
+        tableEl.hidden = false;
+      } catch {
+        loadingEl.hidden = true;
+        tableEl.hidden = true;
+        alert('There was a problem fetching results. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>
